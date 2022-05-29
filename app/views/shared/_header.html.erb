@@ -1,0 +1,20 @@
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" data-controller="header">
+  <%= link_to root_path, class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none ms-5' do%>
+    <i class="bi bi-house"></i>
+    <span class="fs-4">Funny Movie</span>
+  <%end%>
+  <% if current_user.blank? %>
+    <div class="login-container">
+      <input type="text" placeholder="Email" name="email" data-header-target="email">
+      <input type="password" placeholder="Password" name="password" data-header-target="password">
+      <button type="btn" data-bs-toggle="modal" data-bs-target="#signUpModal" data-action="click->header#openModal">Login / Registration</button>
+    </div>
+    <%= render 'shared/sign_up_modal'%>
+  <%else%>
+    <div class="flex align-items-center">
+      <span><%=current_user.email%></span>
+      <%= link_to 'Share a movie', new_post_path, class: 'btn btn-secondary' %>
+      <%= link_to "log out", destroy_user_session_path, class: 'btn btn-danger'%>
+    </div>
+  <%end%>
+</header>
