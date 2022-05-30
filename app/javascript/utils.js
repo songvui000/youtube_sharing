@@ -1,11 +1,10 @@
 export const fetchAPI = (url, options = {}) => {
-
-  fetch(url, options)
+  return fetch(url, options)
     .then(response => {
       if (response.redirected) {
           window.location.href = response.url;
       } else {
-        response.json()
+        return response.json()
       }
     })
     .catch(function(err) {

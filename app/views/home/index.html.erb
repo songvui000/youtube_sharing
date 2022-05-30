@@ -1,3 +1,8 @@
-<div class="container">
-  <%= render(PostComponent.with_collection(@posts, current_user: current_user)) %>
+<div data-controller="infinite-scroll" data-action='scroll@window->infinite-scroll#scroll'>
+  <div data-target="infinite-scroll.entries">
+    <%= render(PostComponent.with_collection(@posts, current_user: current_user)) %>
+  </div>
+  <div data-target='infinite-scroll.pagination' style='display: none'>
+    <%= paginate @posts, params: {controller: 'posts', action: 'index', format: :json} %>
+  </div>
 </div>

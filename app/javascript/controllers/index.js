@@ -5,5 +5,7 @@
 import { application } from "./application"
 import HeaderController from "./header_controller"
 import PostController from "./post_controller"
+import InfiniteScrollController from "./infinite_scroll_controller"
 application.register("header", HeaderController)
 application.register("post", PostController)
+application.register("infinite-scroll", InfiniteScrollController)
