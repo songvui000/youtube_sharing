@@ -1,20 +1,19 @@
 class PostsController < PrivateController
-  before_action :set_post, except: [:index, :new]
-
+  before_action :set_post, except: [:index, :new, :create]
   def new; end
-
   def create
     data = VideoInfo.new(params[:youtube_url]).formatted_data
     post = Post.new(
       user: current_user,
       title: data[:title],
       video_id: data[:id],
-      video_type: 'Youtube',
+      video_type: data['provider'],
       description: data[:description]
     )
     post.save!
-
     redirect_to root_path
+  rescue VideoInfo::UrlError => e
+    render_4xx(400, 'error', { errors: e.message })
   end
 
   def vote_up

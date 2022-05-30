@@ -1,6 +1,4 @@
 require 'open-uri'
-require 'net/http'
-
 
 class VideoInfo::Provider
   attr_accessor :url, :iframe_attributes, :video_id
@@ -18,23 +16,10 @@ class VideoInfo::Provider
   def fetch_data_from_api(url_of_api = api_url)
     uri = URI.parse(url_of_api).open
     JSON.parse(uri.read)
-  rescue OpenURI::HTTPError => e
-    if e.instance_of?(OpenURI::HTTPError) &&
-       e.respond_to?(:io) &&
-       e.io.respond_to?(:status)
-      response_code = e.io.status[0]
-      if response_code == '400'
-        log_warn('your API key is probably invalid. Please verify it.')
-      end
-    end
-
-    msg = 'unexpected network error while
-          fetching information about the video'
-    raise StandardError, msg
   end
 
   def fetch_video_id_from_url
-    @video_id = @url.match(url_regex)[1]
+    @video_id = @url.match(self.class.url_regex)[1]
     unless valid_video_id?
       raise UrlError, "Url is not valid, video_id is not found: #{url}"
     end
@@ -42,5 +27,27 @@ class VideoInfo::Provider
 
   def valid_video_id?
     video_id && video_id != url && !video_id.empty?
+  end
+
+  private
+
+  def api_url
+    raise NotImplementedError.new(
+      'Provider class must implement #api_url private method'
+    )
+  end
+
+  class << self
+    def usable?(_url)
+      raise NotImplementedError.new(
+        'Provider class must implement #usable? public method'
+      )
+    end
+
+    def url_regex
+      raise NotImplementedError.new(
+        'Provider class must implement #url_regex private method'
+      )
+    end
   end
 end

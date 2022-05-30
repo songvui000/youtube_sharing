@@ -1,11 +1,13 @@
 class VideoInfo
+  class UrlError < StandardError; end
+
   PROVIDERS = %w[
     YouTube
   ].freeze
 
   extend Forwardable
 
-  def_delegators :@provider, :provider, :video_id, :video_owner, :url, :data
+  def_delegators :@provider, :provider, :url, :video_id, :data, :formatted_data
 
   def initialize(url)
     @provider = select_provider(url)

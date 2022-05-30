@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @posts = Post.preload(:votes_for, :user).page(params[:page]).per(10)
+    @posts = Post.preload(:votes_for, :user).page(params[:page]).per(10).order(created_at: :desc)
 
     respond_to do |format|
       format.html

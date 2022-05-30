@@ -1,13 +1,19 @@
 class VideoInfo::YouTube < VideoInfo::Provider
   def formatted_data
-    item = @data['items'][0]
+    item = data['items'][0]
     {
       id: item['id'],
-      video_type: 'Youtube',
+      video_type: provider,
       title: item['snippet']['title'],
       description: item['snippet']['description']
     }
   end
+
+  def provider
+    'YouTube'
+  end
+
+  private
 
   def api_key
     Rails.application.credentials.google_key_api
@@ -27,14 +33,13 @@ class VideoInfo::YouTube < VideoInfo::Provider
     "https://#{api_base}#{api_path}"
   end
 
-  def url_regex
-    %r{^(?:(?:https?:)?\/\/)?(?:(?:www|m)\.)?(?:(?:youtube\.com|youtu.be))(?:\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(?:\S+)?$}x
-  end
-
   class << self
     def usable?(url)
-      url =~ %r{(youtube\.com\/(?!playlist|embed\/videoseries).*)|
-                (youtu\.be)}x
+      url =~ url_regex
+    end
+
+    def url_regex
+      %r{^(?:(?:https?:)?\/\/)?(?:(?:www|m)\.)?(?:(?:youtube\.com|youtu.be))(?:\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(?:\S+)?$}x
     end
   end
 end
