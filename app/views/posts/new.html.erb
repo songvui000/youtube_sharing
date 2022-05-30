@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="position-relative">
+    <span class="with-header-top">Share a Youtube movie</span>
+    <%= form_tag posts_path, method: 'post', class: 'shadow-lg p-5 bg-body rounded border border-dark' do%>
+      <div class="row justify-content-start mb-5">
+        <div class="col-md-3">
+          <%= label_tag 'youtube_url', 'Youtube URL'%>
+        </div>
+        <div class="col-md-6">
+          <%= text_field_tag 'youtube_url', '', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-2 text-center ">
+          <%= submit_tag 'Share', class: 'btn btn-primary'%>
+          </div>
+      </div>
+    <%end%>
+  </div>
+</div>
