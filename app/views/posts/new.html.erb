@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="position-relative" data-controller='new-post'>
+    <span class="with-header-top">Share a Youtube movie</span>
+    <div class = 'shadow-lg p-5 bg-body rounded border border-dark'>
+      <div class="row justify-content-start mb-5">
+        <div class="col-md-3">
+          <%= label_tag 'youtube_url', 'Youtube URL'%>
+        </div>
+        <div class="col-md-6">
+          <input type='text' name='youtube_url' class= 'form-control' data-target='new-post.youTubeURL' />
+          <div class='invalid-feedback' data-target='new-post.errors' style='display: block'>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-2 text-center ">
+          <button type='btn' class= 'btn btn-primary' data-action='click->new-post#submit'>
+            Share  
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
