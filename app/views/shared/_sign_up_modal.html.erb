@@ -8,8 +8,8 @@
       <div class="modal-body">
         <div class="tabs">
           <!--  LOG IN  -->
-          <input class="radio" id="tab-1" name="tabs-name" type="radio" checked />
-          <label for="tab-1" class="table"><span>Login</span></label>
+          <input class="radio" id="modal-tab-1" name="tabs-name" type="radio" checked />
+          <label for="modal-tab-1" class="table"><span>Login</span></label>
           <div class="tabs-content">
             <%= form_for(resource, as: resource_name, url: session_path(resource_name), "data-header-target": "loginForm") do |f| %>
               <%= f.email_field :email, placeholder: 'Email', autocomplete: "email", required: true, "data-header-target": 'emailModal' %>
@@ -18,8 +18,8 @@
             <% end %>
           </div>
           <!--  SIGN UP  -->
-          <input class="radio" id="tab-2" name="tabs-name" type="radio" />
-          <label for="tab-2" class="table"><span>Sign up</span></label>
+          <input class="radio" id="modal-tab-2" name="tabs-name" type="radio" />
+          <label for="modal-tab-2" class="table"><span>Sign up</span></label>
           <div class="tabs-content">
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), "data-header-target": "registerForm") do |f| %>
               <%= f.email_field :email, placeholder: 'Email', autocomplete: "email", required: true, "data-header-target": 'emailModal' %>
