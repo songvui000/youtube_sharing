@@ -3,6 +3,6 @@
     <%= render(PostComponent.with_collection(@posts, current_user: current_user)) %>
   </div>
   <div data-target='infinite-scroll.pagination' style='display: none'>
-    <%= paginate @posts, params: {controller: 'posts', action: 'index', format: :json} %>
+    <%= paginate @posts, params: {format: :json} %>
   </div>
 </div>

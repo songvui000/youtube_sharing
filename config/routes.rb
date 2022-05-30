@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'home#index'
 
-  resources :posts, only: [:new, :create, :index] do
+  resources :posts, only: [:new, :create] do
     post 'vote_up'
     post 'vote_down'
   end

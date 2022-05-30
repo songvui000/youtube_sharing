@@ -1,18 +1,6 @@
 class PostsController < PrivateController
   before_action :set_post, except: [:index, :new]
 
-  def index
-    @posts = Post.preload(:votes_for, :user).page(params[:page]).per(10)
-    respond_to do |format|
-      format.json {
-        render json: {
-          entries: PostComponent.with_collection(@posts, current_user: current_user).render_in(view_context),
-          pagination: view_context.paginate(@posts, params: { format: :json })
-        }
-      }
-    end
-  end
-
   def new; end
 
   def create
